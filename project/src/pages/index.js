@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div className="">
-      HOME
+    <div className="flex min-h-[80vh]">
+      
     </div>
   );
 }
