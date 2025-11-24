@@ -8,15 +8,15 @@ export default function Header() {
       </Link>
       
       <div className="flex gap-12 ">
-        <Link href="about">
+        <Link href="/about">
           <div className="cursor-pointer">About</div>
         </Link>
 
-        <Link href="portfolio">
+        <Link href="/portfolio">
           <div className="cursor-pointer">PortFolio</div>
         </Link>
 
-        <Link href="notes">
+        <Link href="/notes">
           <div className="cursor-pointer">Notes</div>
         </Link>
       </div>

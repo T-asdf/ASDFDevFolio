@@ -28,8 +28,8 @@ export default async function handler(req, res) {
     case 'PUT': // 수정
       try {
         const note = await dbModel.findByIdAndUpdate(id, req.body, {
-          new: true, // 업데이트된 문서를 반환
-          runValidators: true, // 업데이트 시에도 유효성 검사 실행
+          new: true,
+          runValidators: true,
         });
 
         if (!note) {
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         if (deletedNote.deletedCount === 0) {
           return res.status(404).json({ success: false, message: '삭제할 노트를 찾을 수 없습니다.' });
         }
-        // 성공적으로 삭제되었지만 반환할 내용이 없음
+        // 삭제 완료
         res.status(200).json({ success: true, data: {} }); 
       } 
       

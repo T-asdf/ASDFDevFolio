@@ -4,10 +4,44 @@ import { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { useRouter } from 'next/router';
 import AuthGate from '@/components/AuthGate';
+import db from '@/lib/db';
+import dbModel from '@/lib/dbModel';
 
-export default function Create() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+export async function getServerSideProps(context) {
+  const { slug } = context.params;
+
+  await db();
+
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  try {
+    const note = await dbModel.findOne({ slug: slug }).lean();
+
+    if (!note) {
+      return { notFound: true };
+    }
+
+    const noteData = {
+      ...note,
+      _id: note._id.toString(),
+      createdAt: new Date(note.createdAt.toISOString()).toLocaleString('ko-KR', options),
+    };
+
+    return { props: { note: noteData } };
+
+  } catch (error) {
+    console.error("상세 페이지 데이터 로드 에러:", error);
+    return { notFound: true };
+  }
+}
+
+export default function Edit({ note }) {
+  const [title, setTitle] = useState(note.title);
+  const [content, setContent] = useState(note.content);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
@@ -21,8 +55,8 @@ export default function Create() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/notes', {
-        method: 'POST',
+      const response = await fetch(`/api/notes/${note._id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -32,18 +66,18 @@ export default function Create() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        alert("업로드가 완료되었습니다.");
+        alert("수정이 완료되었습니다.");
         router.push(`/notes/${note.slug}`); 
       } 
       
       else {
-        alert(`게시물 생성 실패: ${result.error || '알 수 없는 오류'}`);
+        alert(`게시물 수정 실패: ${result.error || '알 수 없는 오류'}`);
       }
 
     } 
     
     catch (error) {
-      console.error("게시물 업로드 중 오류 발생:", error);
+      console.error("게시물 수정 중 오류 발생:", error);
       alert("네트워크 오류 또는 서버 오류가 발생했습니다.");
     } 
     
@@ -72,7 +106,7 @@ export default function Create() {
             disabled={isSubmitting}
             className="px-4 py-1.5 rounded-sm bg-blue-500 text-white"
           >
-            {isSubmitting ? '업로드 중...' : 'Upload'}
+            {isSubmitting ? '수정 중...' : '수정하기'}
           </button>
         </AuthGate>
       </div>
