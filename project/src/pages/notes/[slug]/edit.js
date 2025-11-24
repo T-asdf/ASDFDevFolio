@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import AuthGate from '@/components/AuthGate';
 import db from '@/lib/db';
 import dbModel from '@/lib/dbModel';
+import NotesLayout from '@/components/NotesLayout';
 
 export async function getServerSideProps(context) {
   const { slug } = context.params;
@@ -113,3 +114,11 @@ export default function Edit({ note }) {
     </div>
   )
 }
+
+Edit.getLayout = function getLayout(page) {
+  return (
+    <NotesLayout>
+      {page}
+    </NotesLayout>
+  );
+};

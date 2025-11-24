@@ -1,4 +1,5 @@
 import AuthGate from "@/components/AuthGate";
+import NotesLayout from "@/components/NotesLayout";
 import db from "@/lib/db";
 import dbModel from "@/lib/dbModel";
 import { useRouter } from "next/router";
@@ -91,3 +92,11 @@ export default function notesContent({ note }) {
     </div>
   )
 }
+
+notesContent.getLayout = function getLayout(page) {
+  return (
+    <NotesLayout>
+      {page}
+    </NotesLayout>
+  );
+};

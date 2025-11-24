@@ -1,10 +1,11 @@
 import "@/styles/globals.css";
-import Layout from "@/components/Layout";
+
+const getLayoutDefault = (page) => page;
 
 export default function App({ Component, pageProps }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+  const getLayout = Component.getLayout || getLayoutDefault;
+
+  return getLayout(
+    <Component {...pageProps} />
   );
 }

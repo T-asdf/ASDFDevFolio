@@ -12,8 +12,16 @@ export default function Header() {
           <div className="cursor-pointer">About</div>
         </Link>
 
-        <Link href="/portfolio">
-          <div className="cursor-pointer">PortFolio</div>
+        <Link href="/project">
+          <div className="cursor-pointer">Project</div>
+        </Link>
+
+        <Link href="/awards">
+          <div className="cursor-pointer">Awards</div>
+        </Link>
+
+        <Link href="/stacks">
+          <div className="cursor-pointer">Stacks</div>
         </Link>
 
         <Link href="/notes">

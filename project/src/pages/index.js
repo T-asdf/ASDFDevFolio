@@ -37,8 +37,8 @@ export default function Home() {
         </div> 
       </div>
 
-      <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black text-white">
-        TEST
+      <div className="w-full h-[50vh] bg-gradient-to-br from-gray-900 to-black text-white">
+        
       </div>
     </>
   );

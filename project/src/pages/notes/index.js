@@ -1,3 +1,4 @@
+import NotesLayout from "@/components/NotesLayout";
 import db from "@/lib/db";
 import dbModel from "@/lib/dbModel";
 import Link from "next/link";
@@ -119,3 +120,11 @@ export default function Notes({ notes }) {
     </div>
   )
 }
+
+Notes.getLayout = function getLayout(page) {
+  return (
+    <NotesLayout>
+      {page}
+    </NotesLayout>
+  );
+};

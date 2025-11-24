@@ -4,6 +4,7 @@ import { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { useRouter } from 'next/router';
 import AuthGate from '@/components/AuthGate';
+import NotesLayout from '@/components/NotesLayout';
 
 export default function Create() {
   const [title, setTitle] = useState("");
@@ -92,3 +93,11 @@ export default function Create() {
     </div>
   )
 }
+
+Create.getLayout = function getLayout(page) {
+  return (
+    <NotesLayout>
+      {page}
+    </NotesLayout>
+  );
+};
