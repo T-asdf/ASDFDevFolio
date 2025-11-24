@@ -73,7 +73,7 @@ export default function notesContent({ note }) {
       <div className="flex flex-col gap-2">
         <div className="text-4xl font-[700]">{note.title}</div>
         <div className="flex gap-2">
-          <div className="font-[500] ">카테고리명</div>
+          <div className="font-[500] ">{note.category || '카테고리 없음'}</div>
           <div className="font-[800]">·</div>
           <div className="text-gray-500">{note.createdAt}</div>
           

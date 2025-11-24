@@ -12,6 +12,10 @@ const NoteSchema = new mongoose.Schema({
     required: [true, '내용 입력을 안했다고?'],
   },
 
+  category: {
+    type: String,
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

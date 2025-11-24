@@ -8,6 +8,7 @@ import AuthGate from '@/components/AuthGate';
 export default function Create() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
@@ -26,14 +27,14 @@ export default function Create() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content }),
+        body: JSON.stringify({ title, content, category }),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
         alert("업로드가 완료되었습니다.");
-        router.push(`/notes/${note.slug}`); 
+        router.push(`/notes`); 
       } 
       
       else {
@@ -55,14 +56,26 @@ export default function Create() {
   return (
     <div className="flex flex-col mx-auto gap-10 w-4/5 my-10">
       <div className="mx-auto text-3xl font-[600]">Upload Notes</div>
-      <input 
-        type="text" 
-        value={title}
-        onChange={(e) => {setTitle(e.target.value)}}
-        className="text-gray-700 text-xl font-[600] bg-white/0 hover:border-blue-400 focus:border-blue-400 border-b-[1px] border-gray-300 p-1.5 outline-none transtion-all duration-200"
-        placeholder="제목을 입력하세요."
-        disabled={isSubmitting}
-      />
+
+      <div className="flex w-full gap-5">
+        <input 
+          type="text" 
+          value={title}
+          onChange={(e) => {setTitle(e.target.value)}}
+          className="w-full text-gray-700 text-xl font-[600] bg-white/0 hover:border-blue-400 focus:border-blue-400 border-b-[1px] border-gray-300 p-1.5 outline-none transtion-all duration-200"
+          placeholder="제목을 입력하세요."
+          disabled={isSubmitting}
+        />
+        
+        <input 
+          type="text" 
+          value={category}
+          onChange={(e) => {setCategory(e.target.value)}}
+          className="text-gray-700 text-sm font-[400] bg-white/0 hover:border-blue-400 focus:border-blue-400 border-b-[1px] border-gray-300 p-1.5 outline-none transtion-all duration-200"
+          placeholder="카테고리를 입력하세요."
+          disabled={isSubmitting}
+        />
+      </div>
 
       <MDEditor tabSize={2} value={content} onChange={setContent} height={500} />
 
