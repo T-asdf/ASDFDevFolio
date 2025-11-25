@@ -70,7 +70,7 @@ export default function notesContent({ note }) {
   };
 
   return (
-    <div className="flex flex-col mx-auto gap-10 w-[1000px] p-8 my-10">
+    <div className="flex flex-col mx-auto gap-10 sm:w-[1000px] px-8 sm:px-8 sm:py-8 sm:my-10">
       <div className="flex flex-col gap-2">
         <div className="text-4xl font-[700]">{note.title}</div>
         <div className="flex gap-2">
